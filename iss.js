@@ -58,8 +58,27 @@ function fetchCoordsByIP(ip,callback) {
     let lon = JSON.parse(body).longitude;
     let latti = JSON.parse(body).latitude;
     
-    callback(null, {lon,latti});
+    callback(null, {lon,latti});    //this is passing the value to the callback in index.js
   });
 }
 
-module.exports = { fetchMyIP, fetchCoordsByIP };
+const fetchISSFlyOverTimes = function(loc, callback) {
+  const url = `http://api.open-notify.org/iss-pass.json?lat=${loc.latitude}&lon=${loc.longitude}`;
+
+  request(url, (error, response, body) => {
+    if (error) {
+      callback(error, null);
+      return;
+    }
+
+    if (response.statusCode !== 200) {
+      callback(Error(`Status Code ${response.statusCode} when fetching ISS pass times: ${body}`), null);
+      return;
+    }
+
+    const passes = JSON.parse(body).response;
+    callback(null, passes);
+  });
+};
+
+module.exports = { fetchMyIP, fetchCoordsByIP, fetchISSFlyOverTimes };
