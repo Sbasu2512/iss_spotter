@@ -62,8 +62,9 @@ function fetchCoordsByIP(ip,callback) {
   });
 }
 
+
 const fetchISSFlyOverTimes = function(loc, callback) {
-  const url = `http://api.open-notify.org/iss-pass.json?lat=${loc.latitude}&lon=${loc.longitude}`;
+  const url = `http://api.open-notify.org/iss-pass.json?lat=${loc.latti}&lon=${loc.lon}`;
 
   request(url, (error, response, body) => {
     if (error) {
