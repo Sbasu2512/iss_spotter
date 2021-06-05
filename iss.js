@@ -6,7 +6,7 @@
  *   - An error, if any (nullable)
  *   - The IP address as a string (null if error). Example: "162.245.144.188"
  */
-
+ const request = require("request");
 const fetchMyIP = function(callback) { 
   // use request to fetch IP address from JSON API
   //console.log("Inside fetchmyip");
@@ -15,7 +15,8 @@ const fetchMyIP = function(callback) {
     //console.log("Inside request");
   if(error){
     //console.log("Inside if statement error");
-    callback(err,null);
+    //when call back is called, it will send either error/null depending upon which is true.
+    callback(err,null);   
     return;
   }
   if(response.statusCode !== 200){
