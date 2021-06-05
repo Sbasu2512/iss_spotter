@@ -105,7 +105,7 @@ const fetchISSFlyOverTimes = function(loc, callback) {
           callback(error,null);
         }
         //instead of returning the coords we will call another function which takes 
-        
+        callback(null,passtimes);
       });
 
     });
