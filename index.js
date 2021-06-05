@@ -1,4 +1,4 @@
-
+const { fetchISSFlyOverTimes } = require('./iss');
 const { fetchCoordsByIP } = require('./iss');
 const { fetchMyIP } = require('./iss');
 
@@ -23,3 +23,14 @@ if(error) {
 console.log("it Worked! Geolocation is:", data);
 });
 
+let location = { lon: -79.3644, latti: 43.7124 };
+
+
+//this is just calling the function from iss.js
+fetchISSFlyOverTimes(location,(error,data)=> {
+  if(error){
+    console.log("It didnt work", error);
+    return;
+  }
+  console.log("it worked! flyOverTimes is:", data);
+});
