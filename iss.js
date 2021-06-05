@@ -35,4 +35,31 @@ const fetchMyIP = function(callback) {
 });
 }
 
-module.exports = { fetchMyIP };
+/*
+Define the fetchCoordsByIP function in iss.js.
+
+1. It should take in two arguments: ip (string) and callback
+2. Add the function to the object properties being exported from iss.js
+For now, it can have an empty body and do nothing
+*/
+
+function fetchCoordsByIP(ip,callback) {
+
+  request('https://freegeoip.app/json/',(error,response,body) => {
+    if(error){
+      console.log(error,null);
+    }
+    if(response.statusCode !== 200){
+      const msg = `Status Code ${response.statusCode} when fetching IP. Response: ${body}`;
+    //console.log("line 16")
+    callback(Error(msg), null);
+    }
+
+    let lon = JSON.parse(body).longitude;
+    let latti = JSON.parse(body).latitude;
+    
+    callback(null, {lon,latti});
+  });
+}
+
+module.exports = { fetchMyIP, fetchCoordsByIP };
