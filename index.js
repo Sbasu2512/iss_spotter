@@ -1,5 +1,5 @@
 
-
+const { fetchCoordsByIP } = require('./iss');
 const { fetchMyIP } = require('./iss');
 
 fetchMyIP((error, ip) => {                //(error, ip) => anonymous calllback fn!
@@ -10,4 +10,12 @@ fetchMyIP((error, ip) => {                //(error, ip) => anonymous calllback f
 
   console.log('It worked! Returned IP:' , ip);
 });
-//fetchMyIP();
+
+fetchCoordsByIP(ip, (data,error) => {
+if(error) {
+  console.log("It didn't work!", error);
+  return;
+}
+console.log("it Worked! Geolocation is:", data);
+});
+
