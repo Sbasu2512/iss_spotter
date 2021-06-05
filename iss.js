@@ -89,20 +89,26 @@ const fetchISSFlyOverTimes = function(loc, callback) {
  *     [ { risetime: <number>, duration: <number> }, ... ]
  */ 
  const nextISSTimesForMyLocation = function(callback) {
-  // empty for now
+  // calling fetchMyIP which takes a call back as its parameter and returns IP address!
   fetchMyIP((error,ip)=>{
     if(error){
       callback(error,null)                  //if error it calls the call back with error
     }
-    //instead of returning the ip, we are just calling another function!
-    fetchCoordsByIP(ip,(error,cords)=>{
+    //instead of returning the ip, we are just calling another function which takes IP and another call back function as its parameter returns the coordinates!
+    fetchCoordsByIP(ip,(error,coordinates)=>{
       if(error){
         callback(error,null)
       }
-      //instead of returning the coords we will call another function here!
+      //instead of returning the coords we will call another function here which takes coords as its first parameter and a callback func as its second parameter. It returns passover times! 
+      fetchISSFlyOverTimes(coordinates, (error, passtimes)=>{
+        if(error){
+          callback(error,null);
+        }
+        //instead of returning the coords we will call another function which takes 
+        
+      });
 
-      
-    })
+    });
   });
 
 }
