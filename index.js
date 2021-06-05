@@ -1,10 +1,13 @@
-const request = require("request");
 
-const fetchMyIP = function(callback) { 
-  // use request to fetch IP address from JSON API
-  request("https://api.ipify.org/?format=json", (error,response,body)=>{
-  console.log(body);
-  });
-}
 
-module.exports = { fetchMyIP };
+const { fetchMyIP } = require('./iss');
+
+fetchMyIP((error, ip) => {                //(error, ip) => anonymous calllback fn!
+  if (error) {
+    console.log("It didn't work!" , error);
+    return;
+  }
+
+  console.log('It worked! Returned IP:' , ip);
+});
+//fetchMyIP();
